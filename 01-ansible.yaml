@@ -1,5 +1,0 @@
-- name: Ping theserver
-  host: frontend
-  tasks:
-  - name: Ping the frontend server
-    ping: "ping the frontend server"
