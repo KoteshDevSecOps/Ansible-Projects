@@ -1,12 +1,13 @@
 - name: demo on variables
-  hosts: inventory.ini
+  hosts: localhost
+  connection: local
   vars:
     COURSE: "Ansible for Beginners"
     TRAINER: "KB"
     DURATION: "10 days"
   tasks:
-  - name: print variables
-    vars:
-      COURSE: "DevSecOps with AIOPS"
+  - name: print information
+    vars: 
+      COURSE: "dEVsEVoPS WITH ai"
   - debug:
       msg: "Hi I am learning{{ COURSE }}, Trainer is {{ TRAINER }}, Duration is {{ DURATION }}"
