@@ -1,6 +1,6 @@
 - name: demo on prompt
-  hosts: local
-  connection: local
+  hosts: forntend 
+  #connection: local
   vars_prompt:
   - name: username
     prompt: "Enter your username"
