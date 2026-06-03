@@ -1,8 +1,8 @@
 - name: demo on variables
-  hosts: localhost
+  hosts: local
   connection: local
   vars_file:
-  - coures.yaml
+  - course.yaml
   tasks:
   - name: print variable information
   - debug:
