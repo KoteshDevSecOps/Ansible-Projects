@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   vars_file:
-  - Coures.yaml
+  - coures.yaml
   tasks:
   - name: print variable information
   - debug:
