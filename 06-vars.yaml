@@ -1,6 +1,5 @@
 - name: demo on variables
-  hosts: localhost
-  connection: local
+  hosts: inventory.ini
   vars:
     COURSE: "Ansible for Beginners"
     TRAINER: "KB"
