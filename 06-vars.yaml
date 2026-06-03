@@ -5,7 +5,7 @@
     TRAINER: "KB"
     DURATION: "10 days"
   tasks:
-  - name: print informastion
+  - name: print variables
     vars:
       COURSE: "DevSecOps with AIOPS"
   - debug:
