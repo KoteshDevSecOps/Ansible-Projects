@@ -4,6 +4,7 @@
   vars: 
     instances: ["mongodb", "redis", "mysql", "rabbitmq", "frontend"]
     image_id: ami-0220d79f3f480ecf5
+    action: create
   tasks: 
   - name: create ec2 instances
     amazon.aws.ec2_instance:
@@ -20,10 +21,10 @@
  #   debug:
   #    msg: "{{ ec2_output.results }}"
     
-  - name: create route53 record
+ # - name: create route53 record
     debug: 
-      msg: "Instance Name: {{ item.item}} privateIP: {{ item.instances[0].private_ip_address }}"
-    loop: "{{ ec2_output.results }}"
+  #    msg: "Instance Name: {{ item.item}} privateIP: {{ item.instances[0].private_ip_address }}"
+  #  loop: "{{ ec2_output.results }}"
   - name: create route53 receord
     amazon.aws.route53:
       state: present
