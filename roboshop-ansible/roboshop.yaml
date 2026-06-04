@@ -47,28 +47,24 @@
       value: "{{ item.instances[0].private_ip_address }}"
       overwrite: true
     loop: "{{ ec2_output.results }}"
-    when: 
-    - item.item == "frontend"
-    - action == "create"
+    when: action == "create
 
-    - name: delete r53 records
-      amazon.aws.route53:
-        state: absent
-        zone: "{{ domain_name }}"
-        record: "{{ item.item }}.{{ domain_name }}"
-        ttl: 1
-        type: A
+  - name: delete r53 records
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "{{ item.item }}.{{ domain_name }}"
+      ttl: 1
+      type: A
       loop: "{{ ec2_output.results }}"
-      when: 
-      - item.item == "frontend"
-      - action == "delete"
-    - name: delete r53 record for frontend
-      amazon.aws.route53:
-        state: absent
-        zone: "{{ domain_name }}"
-        record: "{{ domain_name }}"
-        ttl: 1
-        type: A
+      when: action == "delete"
+  - name: delete r53 record for frontend
+    amazon.aws.route53:
+      state: absent
+      zone: "{{ domain_name }}"
+      record: "{{ domain_name }}"
+      ttl: 1
+      type: A
       loop: "{{ instances }}"
       when: 
       - item == "frontend"
