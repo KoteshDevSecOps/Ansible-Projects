@@ -1,9 +1,9 @@
 - name: roboshop instances management
-  hosts: localhost
+  hosts: local
   become: true
-  connection: localhost
+  connection: local
   vars: 
-    instances: ["mangodb", "redis", "mysql", "rabbitmq"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq"]
     image_id: ami-0220d79f3f480ecf5
   tasks: 
   - name: create ec2 instances
