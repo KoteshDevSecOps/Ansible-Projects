@@ -51,7 +51,7 @@
     - item.item == "frontend"
     - action == "create"
 
-    - name: delete r53 record
+    - name: delete r53 records
       amazon.aws.route53:
         state: absent
         zone: "{{ domain_name }}"
