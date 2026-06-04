@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars: 
-    instances: ["mongodb", "redis", "mysql", "rabbitmq"]
+    instances: ["mongodb", "redis", "mysql", "rabbitmq", "frontend"]
     image_id: ami-0220d79f3f480ecf5
   tasks: 
   - name: create ec2 instances
@@ -13,6 +13,7 @@
       security_groups:  
       - "Seg-Common"
     loop: "{{ instances }}"
+    overwrite: true
     register: ec2_output
 
  # - name: print ec2 output
@@ -45,4 +46,29 @@
       value: "{{ item.instances[0].private_ip_address }}"
       overwrite: true
     loop: "{{ ec2_output.results }}"
-    when: item.item == "frontend"
+    when: 
+    - item.item == "frontend"
+    - action == "create"
+
+    - name: delete r53 record
+      amazon.aws.route53:
+        state: absent
+        zone: "{{ domain_name }}"
+        record: "{{ item.item }}.{{ domain_name }}"
+        ttl: 1
+        type: A
+      loop: "{{ ec2_output.results }}"
+      when: 
+      - item.item == "frontend"
+      - action == "delete"
+    - name: delete r53 record for frontend
+      amazon.aws.route53:
+        state: absent
+        zone: "{{ domain_name }}"
+        record: "{{ domain_name }}"
+        ttl: 1
+        type: A
+      loop: "{{ instances }}"
+      when: 
+      - item == "frontend"
+      - action == "delete"
