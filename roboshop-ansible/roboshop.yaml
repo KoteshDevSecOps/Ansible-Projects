@@ -14,15 +14,15 @@
       security_groups:  
       - "Seg-Common"
     loop: "{{ instances }}"
-    overwrite: true
     register: ec2_output
+    when: action == "create"
 
  # - name: print ec2 output
  #   debug:
   #    msg: "{{ ec2_output.results }}"
     
  # - name: create route53 record
-    debug: 
+   # debug: 
   #    msg: "Instance Name: {{ item.item}} privateIP: {{ item.instances[0].private_ip_address }}"
   #  loop: "{{ ec2_output.results }}"
   - name: create route53 receord
