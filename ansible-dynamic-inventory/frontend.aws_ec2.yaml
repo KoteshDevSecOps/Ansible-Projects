@@ -5,5 +5,5 @@ regions:
 hostnames:
   - private-ip-address
 filters:
-  tags:Name: frontend
+  tag:Name: frontend
   istance-state-name: running
